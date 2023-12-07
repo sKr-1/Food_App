@@ -1,5 +1,5 @@
 const express = require("express")
-var mysql = require('mysql2');
+var mysql = require('mysql');
 var app = express()
 
 
@@ -10,9 +10,9 @@ app.use(express.static(__dirname+'/public'));
 
 var con = mysql.createConnection({
     host: "localhost",
-    user: "root",
-    password: "Shivam29@",
-    database: "bookdata"
+    user: "root@localhost",
+    password: "mysql",
+    database: "food"
 });
 
 con.connect(function(err) {
@@ -25,10 +25,10 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 }); 
    
-app.post('/submit', (req, res) => { 
+app.post('/order', (req, res) => { 
     const id = req.body.id; 
     const name = req.body.name;
-    var sql = "INSERT INTO books (id, name) VALUES ('"+id+"', '"+name+"')";
+    var sql = "INSERT INTO food_categories (id, name) VALUES ('"+id+"', '"+name+"')";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("1 record inserted");
@@ -36,8 +36,8 @@ app.post('/submit', (req, res) => {
     res.send("Order placed");
 }); 
 
-app.get('/orders', (req,res) => {
-    con.query("SELECT * FROM books", function (err, result, fields) {
+app.get('/getFoodDetails', (req,res) => {
+    con.query("SELECT * FROM food_details", function (err, result, fields) {
         if (err) throw err;
         console.log("Final list");
         res.send(result);
