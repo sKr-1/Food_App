@@ -1,7 +1,7 @@
 {
-  "name": "cloud-app",
+  "name": "food-app",
   "version": "1.0.0",
-  "description": "demo",
+  "description": "food app",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
